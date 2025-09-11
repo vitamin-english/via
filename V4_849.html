@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동명사의 의미상의 주어 분석</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 850px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            padding: 40px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .sentence-section {
+            background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3b82f6;
+        }
+
+        .sentence {
+            font-size: 18px;
+            color: #1e293b;
+            font-weight: 600;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .main-analysis {
+            margin-bottom: 30px;
+        }
+
+        .analysis-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .parts-grid {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+
+        .main-part {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 3px solid;
+        }
+
+        .subject-part {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border-color: #f59e0b;
+        }
+
+        .verb-part {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-color: #10b981;
+        }
+
+        .complement-part {
+            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+            border-color: #ec4899;
+            grid-column: 3;
+        }
+
+        .equals-sign {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6366f1;
+            text-align: center;
+        }
+
+        .part-label {
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .subject-part .part-label { color: #d97706; }
+        .verb-part .part-label { color: #047857; }
+        .complement-part .part-label { color: #be185d; }
+
+        .part-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 5px;
+        }
+
+        .part-meaning {
+            font-size: 13px;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .gerund-breakdown {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            border-left: 6px solid #8b5cf6;
+        }
+
+        .breakdown-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .gerund-parts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .gerund-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .logical-subject {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+        }
+
+        .gerund-verb {
+            border-color: #6366f1;
+            background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+        }
+
+        .gerund-object {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+        }
+
+        .prepositional {
+            border-color: #ec4899;
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+        }
+
+        .item-label {
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .logical-subject .item-label { color: #d97706; }
+        .gerund-verb .item-label { color: #4f46e5; }
+        .gerund-object .item-label { color: #047857; }
+        .prepositional .item-label { color: #be185d; }
+
+        .item-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+
+        .item-meaning {
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.3;
+        }
+
+        .formula-section {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .formula-text {
+            font-size: 18px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+
+        .key-points-section {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 6px solid #3b82f6;
+        }
+
+        .key-points-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .points-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .point-item {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .point-item::before {
+            content: "•";
+            color: #3b82f6;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 16px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .strong-text {
+            font-weight: bold;
+            color: #374151;
+        }
+
+        .decoration-circle {
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #3b82f615, #8b5cf615);
+            border-radius: 50%;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="decoration-circle"></div>
+        
+        <div class="header">
+            <div class="title">📚 동명사의 의미상의 주어 완전 분석</div>
+            <div class="subtitle">gerund phrase with logical subject</div>
+        </div>
+
+        <div class="sentence-section">
+            <div class="sentence">
+                One American wedding custom is the bride tossing her bouquet to unmarried women.
+            </div>
+        </div>
+
+        <div class="main-analysis">
+            <div class="analysis-title">🔍 문장 성분 분석 (2형식 S + V + C)</div>
+            
+            <div class="parts-grid">
+                <div class="main-part subject-part">
+                    <div class="part-label">주어 (S)</div>
+                    <div class="part-text">One American wedding custom</div>
+                    <div class="part-meaning">미국 결혼식 풍습 중 하나</div>
+                </div>
+                
+                <div class="equals-sign">=</div>
+                
+                <div class="main-part verb-part">
+                    <div class="part-label">동사 (V)</div>
+                    <div class="part-text">is</div>
+                    <div class="part-meaning">~이다</div>
+                </div>
+                
+                <div class="main-part complement-part">
+                    <div class="part-label">보어 (C) - 동명사구</div>
+                    <div class="part-text">the bride tossing her bouquet to unmarried women</div>
+                    <div class="part-meaning">신부가 미혼 여성들에게 꽃다발을 던지는 것</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gerund-breakdown">
+            <div class="breakdown-title">🎯 동명사구 세부 분석</div>
+            
+            <div class="gerund-parts">
+                <div class="gerund-item logical-subject">
+                    <div class="item-label">의미상의 주어</div>
+                    <div class="item-text">the bride</div>
+                    <div class="item-meaning">던지는 주체<br>(신부)</div>
+                </div>
+                
+                <div class="gerund-item gerund-verb">
+                    <div class="item-label">동명사</div>
+                    <div class="item-text">tossing</div>
+                    <div class="item-meaning">던지는 것<br>(명사 역할)</div>
+                </div>
+                
+                <div class="gerund-item gerund-object">
+                    <div class="item-label">목적어</div>
+                    <div class="item-text">her bouquet</div>
+                    <div class="item-meaning">그녀의 꽃다발<br>(던지는 대상)</div>
+                </div>
+                
+                <div class="gerund-item prepositional">
+                    <div class="item-label">전치사구</div>
+                    <div class="item-text">to unmarried women</div>
+                    <div class="item-meaning">미혼 여성들에게<br>(방향/대상)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="formula-section">
+            <div class="formula-text">[명사] + [동명사] + [목적어] + [전치사구] = 동명사구 (보어)</div>
+        </div>
+
+        <div class="key-points-section">
+            <div class="key-points-title">
+                ✨ 핵심 문법 포인트
+            </div>
+            <ul class="points-list">
+                <li class="point-item">
+                    <span class="strong-text">동명사의 의미상의 주어:</span> <span class="highlight">the bride</span>가 tossing의 행위 주체
+                </li>
+                <li class="point-item">
+                    <span class="strong-text">동명사 vs 현재분사:</span> 여기서 tossing은 명사 역할을 하는 동명사 (진행시제 아님)
+                </li>
+                <li class="point-item">
+                    <span class="strong-text">보어 역할:</span> 전체 동명사구가 주어를 설명하는 주격보어
+                </li>
+                <li class="point-item">
+                    <span class="strong-text">구조:</span> "명사 + 동명사" 형태로 의미상의 주어 표현 가능
+                </li>
+                <li class="point-item">
+                    <span class="strong-text">해석:</span> "미국 결혼식 풍습 중 하나는 신부가 미혼 여성들에게 꽃다발을 던지는 것이다"
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
