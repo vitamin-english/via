@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>be used to V-ing 동사 분석</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .sentence-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #6c5ce7;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: #2d3436;
+        }
+        
+        .confusion-point {
+            background: #fff3cd;
+            border: 3px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .confusion-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+        
+        .structure-analysis {
+            background: #f0f8ff;
+            border: 2px dashed #3498db;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .structure-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .verb-breakdown {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .component {
+            display: inline-block;
+            margin: 8px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        .main-verb { background: #e74c3c; }
+        .used { background: #3498db; }
+        .to-prep { background: #27ae60; }
+        .gerund { background: #9b59b6; }
+        .object { background: #f39c12; }
+        
+        .comparison-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .comparison-box {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .wrong-analysis {
+            background: linear-gradient(135deg, #ffb3ba 0%, #ffdfba 100%);
+            border: 3px solid #e74c3c;
+        }
+        
+        .correct-analysis {
+            background: linear-gradient(135deg, #bae1ff 0%, #baffc9 100%);
+            border: 3px solid #00b894;
+        }
+        
+        .box-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .formula {
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #2c3e50;
+            border: 2px dashed #7f8c8d;
+        }
+        
+        .key-point {
+            background: #e8f5e8;
+            border-left: 4px solid #00b894;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .examples-section {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .example-item {
+            background: white;
+            border-left: 4px solid #a29bfe;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .verb-highlight {
+            background: #ffebee;
+            color: #d32f2f;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .idiom-highlight {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .step-analysis {
+            background: #fdf2e9;
+            border: 2px solid #f39c12;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: #f39c12;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+        
+        .similar-patterns {
+            background: #f1f3f4;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .pattern-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #6c5ce7;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .comparison-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .verb-breakdown {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .sentence-box {
+                font-size: 18px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 be used to V-ing 동사 분석</h1>
+            <p>"숙어로 외웠는데 동사가 어디까지인지 모르겠어요!"</p>
+        </div>
+        
+        <div class="sentence-box">
+            My boss is a stubborn character (who is used to getting his own way).
+        </div>
+        
+        <div class="confusion-point">
+            <div class="confusion-title">😵‍💫 헷갈리는 이유</div>
+            <p><strong>"be used to V-ing"</strong>를 하나의 숙어로 외워서</p>
+            <p><strong>"동사가 어디까지인지"</strong> 구분하기 어려운 거예요!</p>
+            <div style="margin-top: 15px; font-size: 18px; color: #2c3e50;">
+                실제로는 <strong>be동사</strong>가 진짜 동사입니다! 👈
+            </div>
+        </div>
+        
+        <div class="structure-analysis">
+            <div class="structure-title">🔍 실제 구조 분석</div>
+            <div class="verb-breakdown">
+                <span class="component main-verb">is</span>
+                <span style="font-size: 20px; margin: 0 10px;">+</span>
+                <span class="component used">used</span>
+                <span class="component to-prep">to</span>
+                <span class="component gerund">getting</span>
+                <span class="component object">his own way</span>
+            </div>
+            <div style="text-align: center; margin-top: 20px; color: #2c3e50; font-size: 16px;">
+                <strong>동사: is</strong> | <strong>형용사: used</strong> | <strong>전치사: to</strong> | <strong>동명사: getting</strong>
+            </div>
+        </div>
+        
+        <div class="comparison-section">
+            <div class="comparison-box wrong-analysis">
+                <div class="box-title">❌ 잘못된 생각</div>
+                <div class="formula">"be used to V-ing"<br>전체가 동사?</div>
+                <div style="color: #c0392b; margin-top: 15px;">
+                    숙어로 외워서<br>
+                    동사 범위를 모르겠음 😵‍💫
+                </div>
+            </div>
+            
+            <div class="comparison-box correct-analysis">
+                <div class="box-title">✅ 올바른 분석</div>
+                <div class="formula">be (동사) + used to V-ing<br>(형용사구)</div>
+                <div style="color: #27ae60; margin-top: 15px;">
+                    <strong>is</strong>만 동사!<br>
+                    나머지는 보어 👍
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-analysis">
+            <h3 style="color: #e67e22; margin-bottom: 25px; text-align: center;">📋 단계별 분석</h3>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>동사 찾기:</strong><br>
+                who <span class="verb-highlight">is</span> used to getting his own way
+                <div style="margin-top: 10px; color: #7f8c8d;">
+                    → <strong>is</strong>가 진짜 동사 (be동사)
+                </div>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>보어 확인:</strong><br>
+                who is <span class="idiom-highlight">used to getting his own way</span>
+                <div style="margin-top: 10px; color: #7f8c8d;">
+                    → "used to ~"는 형용사구 (be동사의 보어)
+                </div>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>문장 형식:</strong><br>
+                2형식: who(S) + is(V) + used to getting his own way(C)
+                <div style="margin-top: 10px; color: #7f8c8d;">
+                    → 주어 + be동사 + 보어 구조
+                </div>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>의미:</strong><br>
+                "자기 뜻대로 하는 것에 익숙한 (사람)"
+                <div style="margin-top: 10px; color: #7f8c8d;">
+                    → "~에 익숙하다"는 상태를 나타냄
+                </div>
+            </div>
+        </div>
+        
+        <div class="key-point">
+            <h3 style="color: #00b894; margin-bottom: 15px;">💡 핵심 포인트</h3>
+            <p><strong>1. be used to V-ing</strong> = be동사 + 형용사구</p>
+            <p><strong>2. 동사는 "be"만!</strong> used to ~는 보어 역할</p>
+            <p><strong>3. used</strong> = 형용사 ("익숙한")</p>
+            <p><strong>4. to</strong> = 전치사 (to부정사 아님!)</p>
+        </div>
+        
+        <div class="examples-section">
+            <h3 style="color: #6c5ce7; margin-bottom: 20px;">📝 동사 찾기 연습</h3>
+            
+            <div class="example-item">
+                <strong>I <span class="verb-highlight">am</span> used to working late.</strong><br>
+                → 동사: <strong>am</strong> | 보어: <strong>used to working late</strong><br>
+                → "나는 늦게까지 일하는 것에 익숙하다"
+            </div>
+            
+            <div class="example-item">
+                <strong>She <span class="verb-highlight">is</span> used to living alone.</strong><br>
+                → 동사: <strong>is</strong> | 보어: <strong>used to living alone</strong><br>
+                → "그녀는 혼자 사는 것에 익숙하다"
+            </div>
+            
+            <div class="example-item">
+                <strong>They <span class="verb-highlight">are</span> used to getting up early.</strong><br>
+                → 동사: <strong>are</strong> | 보어: <strong>used to getting up early</strong><br>
+                → "그들은 일찍 일어나는 것에 익숙하다"
+            </div>
+            
+            <div class="example-item">
+                <strong>We <span class="verb-highlight">were</span> used to his bad temper.</strong><br>
+                → 동사: <strong>were</strong> | 보어: <strong>used to his bad temper</strong><br>
+                → "우리는 그의 나쁜 성격에 익숙했다"
+            </div>
+        </div>
+        
+        <div class="similar-patterns">
+            <h3 style="color: #2c3e50; margin-bottom: 20px;">🔄 비슷한 패턴들</h3>
+            
+            <div class="pattern-item">
+                <strong>be good at V-ing</strong><br>
+                → <span class="verb-highlight">be동사</span> + good at V-ing (형용사구)<br>
+                → "~를 잘하다"
+            </div>
+            
+            <div class="pattern-item">
+                <strong>be tired of V-ing</strong><br>
+                → <span class="verb-highlight">be동사</span> + tired of V-ing (형용사구)<br>
+                → "~에 지치다"
+            </div>
+            
+            <div class="pattern-item">
+                <strong>be interested in V-ing</strong><br>
+                → <span class="verb-highlight">be동사</span> + interested in V-ing (형용사구)<br>
+                → "~에 관심이 있다"
+            </div>
+            
+            <div class="pattern-item">
+                <strong>be afraid of V-ing</strong><br>
+                → <span class="verb-highlight">be동사</span> + afraid of V-ing (형용사구)<br>
+                → "~를 두려워하다"
+            </div>
+        </div>
+        
+        <div style="background: #e8f5e8; padding: 25px; border-radius: 12px; margin-top: 30px;">
+            <h3 style="color: #00b894; margin-bottom: 20px;">✅ 최종 정리</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                <div>
+                    <h4 style="color: #e74c3c; margin-bottom: 15px;">🎯 동사 찾기 요령</h4>
+                    <ul style="margin-left: 20px; color: #2c3e50; line-height: 1.6;">
+                        <li><strong>be used to</strong> → 동사는 <strong>be</strong>만</li>
+                        <li><strong>used to ~</strong> → 형용사구 (보어)</li>
+                        <li>문장 형식: <strong>2형식</strong></li>
+                        <li>의미: <strong>"~에 익숙하다"</strong></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #27ae60; margin-bottom: 15px;">📚 암기 팁</h4>
+                    <ul style="margin-left: 20px; color: #2c3e50; line-height: 1.6;">
+                        <li>숙어로 외우지 말고 <strong>구조 이해</strong></li>
+                        <li><strong>be + 형용사구</strong> 패턴으로 암기</li>
+                        <li>비슷한 패턴들과 함께 학습</li>
+                        <li><strong>used</strong> = 형용사임을 기억</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
