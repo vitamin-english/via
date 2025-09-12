@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>현재완료 vs 현재완료진행 분석</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .sentence-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #6c5ce7;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: #2d3436;
+        }
+        
+        .analysis-section {
+            background: #fff5f5;
+            border: 2px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: "🔍";
+            margin-right: 8px;
+        }
+        
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .comparison-box {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .present-perfect {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border: 3px solid #00b894;
+        }
+        
+        .present-perfect-continuous {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 3px solid #e17055;
+        }
+        
+        .comparison-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .formula {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+        
+        .example {
+            background: rgba(255,255,255,0.6);
+            padding: 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-style: italic;
+            color: #34495e;
+        }
+        
+        .key-point {
+            background: #e8f5e8;
+            border-left: 4px solid #00b894;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .sentence-breakdown {
+            background: #f0f8ff;
+            border: 2px dashed #3498db;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .component {
+            display: inline-block;
+            margin: 8px;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .auxiliary { background: #e74c3c; }
+        .been { background: #3498db; }
+        .preposition { background: #9b59b6; }
+        .noun { background: #27ae60; }
+        .participle { background: #f39c12; }
+        
+        .timeline {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .timeline-line {
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #e74c3c);
+            border-radius: 2px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .timeline-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #e74c3c;
+            border-radius: 50%;
+            top: -8px;
+            right: -10px;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .timeline-label {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .examples-grid {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .example-item {
+            background: white;
+            border-left: 4px solid #a29bfe;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .wrong-example {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+        
+        .correct-example {
+            background: #e8f5e8;
+            border-left: 4px solid #4caf50;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .sentence-box {
+                font-size: 18px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 현재완료 vs 현재완료진행 완전 분석</h1>
+            <p>He's been in agony dealing with the guilt of his bad behavior.</p>
+        </div>
+        
+        <div class="sentence-box">
+            He's been in agony dealing with the guilt of his bad behavior.
+        </div>
+        
+        <div class="analysis-section">
+            <div class="section-title">문장 분석: He's = He has</div>
+            <div class="sentence-breakdown">
+                <div style="margin-bottom: 15px;">
+                    <span class="component auxiliary">He's (has)</span>
+                    <span class="component been">been</span>
+                    <span class="component preposition">in</span>
+                    <span class="component noun">agony</span>
+                    <span class="component participle">dealing with...</span>
+                </div>
+                <div style="font-size: 16px; color: #2c3e50;">
+                    <strong>구조:</strong> has + been + 전치사구 + 분사구(부가설명)
+                </div>
+            </div>
+        </div>
+        
+        <div class="comparison-container">
+            <div class="comparison-box present-perfect">
+                <div class="comparison-title">현재완료 (Present Perfect)</div>
+                <div class="formula">has/have + p.p.<br>has/have + been + 보어/부사구</div>
+                <div class="example">He has been in agony.<br>(그는 지금까지 고통 속에 있어왔다)</div>
+                <div style="margin-top: 15px; font-weight: bold; color: #00b894;">
+                    ✅ 상태의 지속<br>
+                    (과거~현재까지 계속된 상태)
+                </div>
+            </div>
+            
+            <div class="comparison-box present-perfect-continuous">
+                <div class="comparison-title">현재완료진행 (Present Perfect Continuous)</div>
+                <div class="formula">has/have + been + ~ing</div>
+                <div class="example">He has been working.<br>(그는 계속 일해오고 있다)</div>
+                <div style="margin-top: 15px; font-weight: bold; color: #e17055;">
+                    ✅ 동작의 지속<br>
+                    (과거~현재까지 계속된 동작)
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <h3 style="margin-bottom: 20px; color: #2c3e50;">⏰ 시간의 흐름</h3>
+            <div class="timeline-line">
+                <div class="timeline-point"></div>
+            </div>
+            <div class="timeline-label">
+                <span>과거</span>
+                <span style="color: #e74c3c;">현재</span>
+            </div>
+            <div style="margin-top: 15px; color: #7f8c8d;">
+                "고통스러운 상태"가 과거부터 현재까지 계속 이어짐
+            </div>
+        </div>
+        
+        <div class="key-point">
+            <h3 style="color: #00b894; margin-bottom: 15px;">💡 핵심 포인트</h3>
+            <p><strong>1. be in agony</strong> = 상태동사 → <span class="highlight">현재완료(상태)</span></p>
+            <p><strong>2. dealing with...</strong> = 현재분사구 → <span class="highlight">부가적 설명</span></p>
+            <p><strong>3. 의미:</strong> "자신의 잘못된 행동에 대한 죄책감 때문에 지금까지 고통 속에 있어왔다"</p>
+        </div>
+        
+        <div class="examples-grid">
+            <h3 style="color: #6c5ce7; margin-bottom: 20px;">📝 비교 예문들</h3>
+            
+            <div class="example-item correct-example">
+                <strong>현재완료 (상태):</strong> She <span style="color: #e74c3c;">has been</span> happy since her marriage.
+                <br>→ "그녀는 결혼한 이후로 지금까지 행복한 상태다"
+            </div>
+            
+            <div class="example-item correct-example">
+                <strong>현재완료진행 (동작):</strong> She <span style="color: #e74c3c;">has been working</span> since morning.
+                <br>→ "그녀는 아침부터 계속 일하고 있다"
+            </div>
+            
+            <div class="example-item correct-example">
+                <strong>현재완료 (상태):</strong> They <span style="color: #e74c3c;">have been</span> in trouble for months.
+                <br>→ "그들은 몇 달 동안 곤경에 처해있다"
+            </div>
+            
+            <div class="example-item wrong-example">
+                <strong>❌ 잘못된 해석:</strong> He has been in agony를 "고통을 겪고 있는 중이다"로 해석
+                <br><strong>✅ 올바른 해석:</strong> "지금까지 고통스러운 상태에 있어왔다"
+            </div>
+        </div>
+        
+        <div style="background: #e8f5e8; padding: 20px; border-radius: 12px; margin-top: 30px;">
+            <h3 style="color: #00b894; margin-bottom: 15px;">📋 판별 기준</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4 style="color: #27ae60;">현재완료 (상태)</h4>
+                    <ul style="margin-left: 20px; color: #2c3e50;">
+                        <li>has/have + been + 보어</li>
+                        <li>has/have + been + 부사구</li>
+                        <li>상태의 지속을 나타냄</li>
+                        <li>be동사 + 보어/부사구 구조</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #e67e22;">현재완료진행</h4>
+                    <ul style="margin-left: 20px; color: #2c3e50;">
+                        <li>has/have + been + ~ing</li>
+                        <li>동작의 지속을 나타냄</li>
+                        <li>진행형 구조</li>
+                        <li>동작동사 + ing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
