@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동격절 설명</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 3px solid #f0f0f0;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .example-sentence {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 18px;
+            color: #2d3748;
+            font-weight: 500;
+            border-left: 5px solid #4299e1;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .analysis-section {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px dashed #cbd5e0;
+        }
+        
+        .structure-breakdown {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .subject-box {
+            background: #fed7d7;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f56565;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .appositive-box {
+            background: #c6f6d5;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #48bb78;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .formula {
+            background: #2d3748;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .highlight-yellow {
+            background: #fef5e7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #f6e05e;
+        }
+        
+        .explanation-box {
+            background: #e6fffa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #38b2ac;
+        }
+        
+        .key-points {
+            background: #fff5f5;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .key-points h3 {
+            color: #c53030;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .point-item {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .point-item::before {
+            content: "•";
+            color: #c53030;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .content-text {
+            font-size: 16px;
+            color: #2d3748;
+            font-weight: 500;
+        }
+        
+        .arrow {
+            font-size: 24px;
+            color: #4299e1;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        
+        .connection-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 동격절 + 명사 구조 분석</h1>
+            <div class="example-sentence">
+                As society becomes more diverse, <strong>the likelihood</strong> <span style="color: #c53030;">[that people share values]</span> diminishes.
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="analysis-section">
+                <h2 style="color: #2d3748; margin-bottom: 20px;">📝 구조 분석</h2>
+                
+                <div class="structure-breakdown">
+                    <div class="subject-box">
+                        <div class="label">🔵 주어 (명사)</div>
+                        <div class="content-text">the likelihood</div>
+                        <small style="color: #666;">(가능성)</small>
+                    </div>
+                    
+                    <div class="appositive-box">
+                        <div class="label">🟢 동격절</div>
+                        <div class="content-text">that people share values</div>
+                        <small style="color: #666;">(사람들이 가치관을 공유한다는)</small>
+                    </div>
+                </div>
+                
+                <div class="formula">
+                    명사 + that절(동격절) + 동사
+                </div>
+                
+                <div class="connection-line">
+                    <span style="background: #fed7d7; padding: 8px 15px; border-radius: 8px; font-weight: bold;">the likelihood</span>
+                    <span class="arrow">→</span>
+                    <span style="background: #c6f6d5; padding: 8px 15px; border-radius: 8px; font-weight: bold;">that people share values</span>
+                </div>
+            </div>
+            
+            <div class="explanation-box">
+                <h3 style="color: #2d3748; margin-bottom: 15px;">💡 동격절이란?</h3>
+                <p style="line-height: 1.6; color: #4a5568;">
+                    <strong>'that people share values'</strong>는 앞의 명사 <strong>'the likelihood'</strong>의 구체적인 내용을 설명하는 <span class="highlight-yellow">동격절</span>입니다. 
+                    즉, "어떤 가능성인가?"라는 질문에 대한 답이 바로 동격절입니다.
+                </p>
+            </div>
+            
+            <div class="key-points">
+                <h3>🔑 동격절 vs 관계절 결정적 판별법</h3>
+                <div class="point-item"><strong>동격절:</strong> that절 내부가 <span style="color: #c53030;">문장성분 완전</span> (S + V + O/C 모두 있음)</div>
+                <div class="point-item"><strong>관계절:</strong> 관계사절 내부가 <span style="color: #c53030;">문장성분 불완전</span> (주어/목적어 등 빠짐)</div>
+                <div class="point-item"><strong>분석해보기:</strong> "that people share values"</div>
+                <div style="margin-left: 40px; background: #f0f8ff; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <div style="color: #2d3748; font-weight: bold;">S: people / V: share / O: values</div>
+                    <div style="color: #c53030; margin-top: 8px;">→ 문장성분이 <strong>완전</strong>하다! ∴ 동격절 ✅</div>
+                </div>
+                <div class="point-item"><strong>비교:</strong> "the book <u>which</u> I bought" → I bought __ (목적어 빠짐) = 관계절</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
