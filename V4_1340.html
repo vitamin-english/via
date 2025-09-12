@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동명사의 의미상의 주어 분석</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .sentence-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #6c5ce7;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #2d3436;
+        }
+        
+        .correction-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .correction-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+        
+        .breakdown-box {
+            background: #fff5f5;
+            border: 2px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .breakdown-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .breakdown-title::before {
+            content: "🎯";
+            margin-right: 8px;
+        }
+        
+        .visual-breakdown {
+            background: #f0f8ff;
+            border: 2px dashed #3498db;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .component {
+            display: inline-block;
+            margin: 8px;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .subject {
+            background: #ff7675;
+            color: white;
+        }
+        
+        .gerund {
+            background: #74b9ff;
+            color: white;
+        }
+        
+        .prep-phrase {
+            background: #55a3ff;
+            color: white;
+        }
+        
+        .arrow {
+            font-size: 24px;
+            color: #e17055;
+            margin: 0 10px;
+        }
+        
+        .explanation-box {
+            background: #e8f5e8;
+            border-left: 4px solid #00b894;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .formula-box {
+            background: #fdf2e9;
+            border: 2px solid #f39c12;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .formula {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e67e22;
+            margin: 10px 0;
+        }
+        
+        .examples {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-item {
+            background: white;
+            border-left: 4px solid #a29bfe;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .structure-diagram {
+            background: #f1f3f4;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .diagram-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .diagram-box {
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .s-box { background: #ff6b9d; color: white; }
+        .v-box { background: #4ecdc4; color: white; }
+        .prep-box { background: #45b7d1; color: white; }
+        .m-box { background: #96ceb4; color: white; }
+        
+        .sentence-type-box {
+            background: #e8f5e8;
+            border: 3px solid #00b894;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .sentence-type-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00b894;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .sentence-box {
+                font-size: 16px;
+                padding: 20px;
+            }
+            
+            .diagram-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 동명사의 의미상의 주어 완전 분석</h1>
+            <p>Historical evidence points to workers being exploited by employers in the absence of appropriate laws.</p>
+        </div>
+        
+        <div class="sentence-box">
+            Historical evidence points to workers being exploited by employers in the absence of appropriate laws.
+        </div>
+        
+        <div class="sentence-type-box">
+            <div class="sentence-type-title">📋 문장 형식: 1형식 (S + V + 전치사구)</div>
+            <div style="font-size: 18px; color: #2c3e50;">
+                <strong>points to</strong> = 자동사 + 전치사 (구동사)<br>
+                <strong>to</strong> = 전치사이므로 뒤에 오는 것은 전치사의 목적어
+            </div>
+        </div>
+        
+        <div class="correction-box">
+            <div class="correction-title">⚠️ 중요한 문법 포인트</div>
+            <p><strong>point to</strong>는 "~를 가리키다"라는 뜻의 <span style="color: #e74c3c;">자동사 + 전치사</span> 구조입니다.</p>
+            <p>따라서 이 문장은 <strong>1형식</strong>이며, workers being exploited는 <strong>전치사 to의 목적어</strong>입니다.</p>
+        </div>
+        
+        <div class="structure-diagram">
+            <h3 style="margin-bottom: 20px; color: #2c3e50;">📊 올바른 문장 구조 다이어그램</h3>
+            <div class="diagram-row">
+                <div class="diagram-box s-box">S<br>Historical evidence</div>
+                <div class="diagram-box v-box">V (자동사)<br>points to</div>
+                <div class="diagram-box prep-box">전치사구<br>workers being exploited...</div>
+            </div>
+            <div class="diagram-row">
+                <div class="diagram-box m-box">M (부사구)<br>in the absence of appropriate laws</div>
+            </div>
+            <div style="margin-top: 20px; color: #7f8c8d; font-size: 16px;">
+                <strong>1형식:</strong> 주어 + 자동사 + 전치사구 (+ 부사구)
+            </div>
+        </div>
+        
+        <div class="breakdown-box">
+            <div class="breakdown-title">핵심 포인트: 동명사의 의미상의 주어</div>
+            <div class="visual-breakdown">
+                <div style="font-size: 18px; margin-bottom: 15px;">
+                    <span class="component subject">workers</span>
+                    <span class="arrow">→</span>
+                    <span class="component gerund">being exploited</span>
+                    <span class="arrow">→</span>
+                    <span class="component prep-phrase">by employers</span>
+                </div>
+                <div style="color: #2d3436; font-weight: bold;">
+                    "노동자들이 고용주에게 착취당하는 것" (전치사 to의 목적어)
+                </div>
+            </div>
+        </div>
+        
+        <div class="formula-box">
+            <div class="formula">동명사의 의미상의 주어 공식</div>
+            <div style="font-size: 18px; color: #2c3e50;">
+                <strong>[명사/대명사] + [동명사(V-ing)]</strong>
+            </div>
+            <div style="margin-top: 10px; color: #7f8c8d;">
+                → "명사가 ~하는 것"
+            </div>
+        </div>
+        
+        <div class="explanation-box">
+            <h3>🔍 상세 분석</h3>
+            <p><strong>1. Historical evidence</strong> = 주어 (S)</p>
+            <p><strong>2. points to</strong> = 자동사 + 전치사 구조 (V)</p>
+            <p><strong>3. workers</strong> = 동명사 'being exploited'의 <span class="highlight">의미상의 주어</span></p>
+            <p><strong>4. being exploited</strong> = 동명사 수동태 형태 ("착취당하는 것")</p>
+            <p><strong>5. by employers</strong> = 수동태의 행위자 ("고용주에 의해")</p>
+            <p><strong>6. 전체</strong> = "workers being exploited by employers"가 <strong>전치사 to의 목적어</strong></p>
+        </div>
+        
+        <div class="examples">
+            <h3 style="color: #6c5ce7; margin-bottom: 20px;">📝 비슷한 1형식 구조의 예문들</h3>
+            
+            <div class="example-item">
+                <strong>The report pointed to <span style="color: #e74c3c;">students struggling</span> with online classes.</strong>
+                <br>→ students = struggling의 의미상의 주어
+                <br>→ "학생들이 온라인 수업으로 어려움을 겪고 있다는 것을 그 보고서가 지적했다"
+                <br><span style="color: #7f8c8d; font-size: 14px;">★ 1형식: The report + pointed to + 전치사구</span>
+            </div>
+            
+            <div class="example-item">
+                <strong>The study points to <span style="color: #e74c3c;">pollution affecting</span> marine life.</strong>
+                <br>→ pollution = affecting의 의미상의 주어
+                <br>→ "오염이 해양 생물에 영향을 미치고 있다는 것을 그 연구가 보여준다"
+                <br><span style="color: #7f8c8d; font-size: 14px;">★ 1형식: The study + points to + 전치사구</span>
+            </div>
+            
+            <div class="example-item">
+                <strong>Evidence points to <span style="color: #e74c3c;">the company hiding</span> important information.</strong>
+                <br>→ the company = hiding의 의미상의 주어
+                <br>→ "그 회사가 중요한 정보를 숨기고 있다는 것을 증거가 보여준다"
+                <br><span style="color: #7f8c8d; font-size: 14px;">★ 1형식: Evidence + points to + 전치사구</span>
+            </div>
+        </div>
+        
+        <div style="background: #e8f5e8; padding: 20px; border-radius: 12px; margin-top: 30px;">
+            <h3 style="color: #00b894;">✅ 핵심 정리</h3>
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin: 10px 0; padding-left: 25px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #00b894;">▶</span>
+                    <strong>문장 형식:</strong> 1형식 (S + V + 전치사구)
+                </li>
+                <li style="margin: 10px 0; padding-left: 25px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #00b894;">▶</span>
+                    <strong>point to:</strong> 자동사 + 전치사 (구동사)
+                </li>
+                <li style="margin: 10px 0; padding-left: 25px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #00b894;">▶</span>
+                    <strong>동명사 앞의 명사</strong> = 의미상의 주어
+                </li>
+                <li style="margin: 10px 0; padding-left: 25px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #00b894;">▶</span>
+                    <strong>전체 덩어리</strong>가 전치사 to의 목적어 역할
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
