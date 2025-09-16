@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴퓨터 알고리즘 vs 꿀벌의 춤</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background: #f5f7fa;
+            padding: 0;
+            width: 800px;
+            min-height: 1100px;
+            overflow: visible;
+        }
+        
+        .container {
+            width: 800px;
+            min-height: 1100px;
+            background: #f5f7fa;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4472C4 0%, #5B85D6 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin: 20px 50px 0 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .question-box {
+            background: white;
+            border: 2px solid #E1E5EB;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 150px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .question-box .main-q {
+            color: #2F5597;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .question-box .example {
+            color: #70AD47;
+            font-size: 12px;
+            text-align: left;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #2F5597;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .comparison-container {
+            display: flex;
+            margin: 0 50px;
+            gap: 60px;
+        }
+        
+        .comparison-box {
+            flex: 1;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #E7F3FF 0%, #D1E8FF 100%);
+            border: 2px solid #4472C4;
+        }
+        
+        .bee-box {
+            background: linear-gradient(135deg, #FFF2CC 0%, #FFE599 100%);
+            border: 2px solid #E2A610;
+        }
+        
+        .box-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .box-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .algorithm-box .box-title {
+            color: #4472C4;
+        }
+        
+        .bee-box .box-title {
+            color: #E2A610;
+        }
+        
+        .box-subtitle {
+            font-size: 12px;
+            color: #7F7F7F;
+        }
+        
+        .characteristics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .char-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 auto 8px;
+        }
+        
+        .algorithm-box .char-circle {
+            background: #4472C4;
+        }
+        
+        .bee-box .char-circle {
+            background: #E2A610;
+        }
+        
+        .char-text {
+            text-align: center;
+            font-size: 9px;
+            color: #2F5597;
+            font-weight: 500;
+        }
+        
+        .process-summary {
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .algorithm-box .process-summary {
+            background: #B4C6E7;
+            color: #2F5597;
+        }
+        
+        .bee-box .process-summary {
+            background: #F1C232;
+            color: #7F6000;
+        }
+        
+        .vs-arrow {
+            position: absolute;
+            top: 380px;
+            left: 370px;
+            background: #70AD47;
+            color: white;
+            width: 60px;
+            height: 30px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+        
+        .process-flow {
+            background: linear-gradient(135deg, #70AD47 0%, #8BC34A 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px 50px 20px 50px;
+            color: white;
+        }
+        
+        .process-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .process-subtitle {
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step {
+            background: white;
+            border-radius: 8px;
+            padding: 15px 8px;
+            text-align: center;
+            flex: 1;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            background: #70AD47;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .step-title {
+            color: #70AD47;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .step-desc {
+            color: #2F5597;
+            font-size: 9px;
+        }
+        
+        .step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #70AD47;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .insight-box {
+            background: white;
+            border: 3px solid #C55A5A;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 0 100px 20px 100px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .insight-title {
+            text-align: center;
+            color: #C55A5A;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .insight-text {
+            color: #2F5597;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        .example-box {
+            background: #F2F2F2;
+            border: 1px solid #7F7F7F;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 0 150px 20px 150px;
+        }
+        
+        .example-title {
+            text-align: center;
+            color: #2F5597;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .example-text {
+            color: #7F7F7F;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        
+        .timeline {
+            margin: 20px 200px 0 200px;
+            position: relative;
+        }
+        
+        .timeline-title {
+            text-align: center;
+            color: #2F5597;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-line {
+            height: 3px;
+            background: #2F5597;
+            position: relative;
+            margin: 10px 0;
+        }
+        
+        .timeline-point {
+            position: absolute;
+            top: -6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .point-left {
+            left: 50px;
+            background: #4472C4;
+        }
+        
+        .point-right {
+            right: 50px;
+            background: #E2A610;
+        }
+        
+        .timeline-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        .label {
+            text-align: center;
+            font-size: 10px;
+            color: #7F7F7F;
+        }
+        
+        .final-message {
+            text-align: center;
+            color: #2F5597;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 15px 50px 20px 50px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>정보 처리의 두 가지 패러다임</h1>
+            <p>컴퓨터 알고리즘과 꿀벌의 8자 춤 비교 분석</p>
+        </div>
+        
+        <div class="question-box">
+            <div class="main-q">정보 처리에서 '의미'의 유무는 무엇을 결정하는가?</div>
+            <div class="example">예: 꿀벌은 춤 정보를 평가하지만, 컴퓨터는 단순히 처리만 함</div>
+        </div>
+        
+        <div class="section-title">두 가지 정보 처리 시스템의 핵심 차이점</div>
+        
+        <div class="comparison-container">
+            <div class="comparison-box algorithm-box">
+                <div class="box-header">
+                    <div class="box-title">컴퓨터 알고리즘</div>
+                    <div class="box-subtitle">기계적 데이터 처리 방식</div>
+                </div>
+                
+                <div class="characteristics">
+                    <div>
+                        <div class="char-circle">의미<br>없음</div>
+                        <div class="char-text">meaning 개념 부재</div>
+                    </div>
+                    <div>
+                        <div class="char-circle">생존목적<br>부재</div>
+                        <div class="char-text">well-being 목적 없음</div>
+                    </div>
+                    <div>
+                        <div class="char-circle">가치부여<br>없음</div>
+                        <div class="char-text">입력값 평가 안함</div>
+                    </div>
+                    <div>
+                        <div class="char-circle">단순<br>처리</div>
+                        <div class="char-text">기계적 연산만</div>
+                    </div>
+                </div>
+                
+                <div class="process-summary">
+                    입력 → 처리 → 출력<br>
+                    <span style="font-size: 10px;">기계적이고 예측 가능한 반응</span>
+                </div>
+            </div>
+            
+            <div class="comparison-box bee-box">
+                <div class="box-header">
+                    <div class="box-title">꿀벌의 8자 춤</div>
+                    <div class="box-subtitle">생물학적 정보 평가 시스템</div>
+                </div>
+                
+                <div class="characteristics">
+                    <div>
+                        <div class="char-circle">정보평가<br>능력</div>
+                        <div class="char-text">정보 비교 분석</div>
+                    </div>
+                    <div>
+                        <div class="char-circle">내적상태<br>반영</div>
+                        <div class="char-text">개체별 경험 활용</div>
+                    </div>
+                    <div>
+                        <div class="char-circle">선택적<br>행동</div>
+                        <div class="char-text">의사결정 과정</div>
+                    </div>
+                    <div>
+                        <div class="char-circle">가치<br>판단</div>
+                        <div class="char-text">효용성 평가</div>
+                    </div>
+                </div>
+                
+                <div class="process-summary">
+                    춤 정보 + 기존 지식 → 의사결정<br>
+                    <span style="font-size: 10px;">개체별 다른 반응과 선택</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="vs-arrow">VS</div>
+        
+        <div class="process-flow">
+            <div class="process-title">꿀벌 정보 처리의 단계별 과정</div>
+            <div class="process-subtitle">단순한 프로그래밍이 아닌 평가적 의사결정 과정</div>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">춤 정보 수신</div>
+                    <div class="step-desc">거리와 방향 정보</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">기존 지식과 비교</div>
+                    <div class="step-desc">주변 환경 지식 활용</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">가치 평가</div>
+                    <div class="step-desc">효용성 판단</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">선택적 행동</div>
+                    <div class="step-desc">이동 여부 결정</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="insight-box">
+            <div class="insight-title">🔑 핵심 통찰 (Key Insight)</div>
+            <div class="insight-text">
+                꿀벌의 정보 처리는 단순한 프로그래밍이 아니라, 개체의 내적 상태와 경험을 바탕으로 한 평가적 과정이다. 입력 정보의 효과는 처방적(prescriptive)이지 않으며, 각 개체가 주체적으로 판단하고 결정한다.
+            </div>
+        </div>
+        
+        <div class="example-box">
+            <div class="example-title">예시: 꿀벌의 의사결정 과정</div>
+            <div class="example-text">
+                일부 벌들은 춤이 알려주는 먹이원까지의 거리를 보고 "너무 멀어서 가지 않겠다"고 판단할 수 있다. 이는 각자의 에너지 상태와 위험 평가에 따른 선택이다.
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-title">정보 처리 방식의 진화</div>
+            <div class="timeline-line">
+                <div class="timeline-point point-left"></div>
+                <div class="timeline-point point-right"></div>
+            </div>
+            <div class="timeline-labels">
+                <div class="label">
+                    <strong>기계적 처리</strong><br>
+                    컴퓨터 알고리즘
+                </div>
+                <div class="label">
+                    <strong>평가적 처리</strong><br>
+                    생물학적 시스템
+                </div>
+            </div>
+        </div>
+        
+        <div class="final-message">
+            진정한 지능은 정보에 의미를 부여하고 가치를 평가하는 능력에서 나온다
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); border-radius: 15px; margin: 30px 100px 20px 100px; color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">비타민영어클리닉 학원</div>
+            <div style="font-size: 14px; font-style: italic;">Vitamin English Clinic</div>
+        </div>
+    </div>
+
+    <script>
+        // 스크립트 제거
+    </script>
+</body>
+</html>
