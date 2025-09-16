@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Spirit of Audrey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background: #f5f7fa;
+            padding: 0;
+            width: 800px;
+            min-height: 1200px;
+            overflow: visible;
+        }
+        
+        .container {
+            width: 800px;
+            min-height: 1200px;
+            background: #f5f7fa;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin: 20px 50px 0 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .quote-box {
+            background: white;
+            border: 3px solid #FF6B9D;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 80px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .quote-text {
+            color: #2C3E50;
+            font-size: 15px;
+            font-weight: 600;
+            font-style: italic;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        
+        .quote-author {
+            color: #FF6B9D;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #2C3E50;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+        }
+        
+        .timeline-container {
+            background: linear-gradient(135deg, #A8E6CF 0%, #7FCDCD 100%);
+            border-radius: 15px;
+            padding: 30px 25px;
+            margin: 0 50px 30px 50px;
+            color: white;
+            position: relative;
+        }
+        
+        .timeline-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            bottom: 30px;
+            width: 4px;
+            background: rgba(255,255,255,0.5);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid #FF6B9D;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        
+        .timeline-content {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 15px 20px;
+            width: 45%;
+            color: #2C3E50;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-year {
+            background: #FF6B9D;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-event {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2C3E50;
+        }
+        
+        .timeline-desc {
+            font-size: 11px;
+            color: #7F8C8D;
+            line-height: 1.3;
+        }
+        
+        .transformation-section {
+            display: flex;
+            margin: 0 50px 30px 50px;
+            gap: 20px;
+        }
+        
+        .transformation-box {
+            flex: 1;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .before-box {
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFB6B6 100%);
+            border: 2px solid #FF6B6B;
+        }
+        
+        .after-box {
+            background: linear-gradient(135deg, #E8F8E8 0%, #B8E6B8 100%);
+            border: 2px solid #4ECDC4;
+        }
+        
+        .transformation-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .transformation-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .before-box .transformation-title {
+            color: #C0392B;
+        }
+        
+        .after-box .transformation-title {
+            color: #27AE60;
+        }
+        
+        .transformation-items {
+            list-style: none;
+        }
+        
+        .transformation-items li {
+            background: rgba(255,255,255,0.8);
+            margin: 8px 0;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .before-box li {
+            color: #8E44AD;
+            border-left: 3px solid #FF6B6B;
+        }
+        
+        .after-box li {
+            color: #16A085;
+            border-left: 3px solid #4ECDC4;
+        }
+        
+        .movies-section {
+            background: linear-gradient(135deg, #FFE4E6 0%, #FFD3D8 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 0 50px 30px 50px;
+            border: 2px solid #FF6B9D;
+        }
+        
+        .movies-title {
+            text-align: center;
+            color: #C44569;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .movies-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .movie-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .movie-title {
+            color: #C44569;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .movie-desc {
+            color: #7F8C8D;
+            font-size: 10px;
+            line-height: 1.3;
+        }
+        
+        .charity-section {
+            background: linear-gradient(135deg, #74B9FF 0%, #0984E3 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 0 50px 30px 50px;
+            color: white;
+        }
+        
+        .charity-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .charity-journey {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .charity-step {
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 10px 15px;
+            text-align: center;
+            flex: 1;
+            margin: 0 5px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .charity-year {
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .charity-country {
+            font-size: 10px;
+            opacity: 0.9;
+        }
+        
+        .charity-arrow {
+            color: rgba(255,255,255,0.7);
+            font-size: 16px;
+            margin: 0 5px;
+        }
+        
+        .impact-box {
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .impact-text {
+            font-size: 12px;
+            line-height: 1.4;
+            opacity: 0.95;
+        }
+        
+        .beauty-comparison {
+            display: flex;
+            margin: 0 50px 30px 50px;
+            gap: 20px;
+        }
+        
+        .beauty-box {
+            flex: 1;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .outer-beauty {
+            background: linear-gradient(135deg, #FFEAA7 0%, #FDCB6E 100%);
+            border: 2px solid #F39C12;
+        }
+        
+        .inner-beauty {
+            background: linear-gradient(135deg, #FD79A8 0%, #E84393 100%);
+            border: 2px solid #E91E63;
+        }
+        
+        .beauty-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .beauty-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .outer-beauty .beauty-title {
+            color: #D68910;
+        }
+        
+        .inner-beauty .beauty-title {
+            color: #AD1457;
+        }
+        
+        .beauty-desc {
+            font-size: 11px;
+            line-height: 1.4;
+            color: #2C3E50;
+        }
+        
+        .legacy-box {
+            background: white;
+            border: 3px solid #8E44AD;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 0 80px 20px 80px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .legacy-title {
+            color: #8E44AD;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .legacy-text {
+            color: #2C3E50;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .statue-info {
+            background: #F8F9FA;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 11px;
+            color: #6C757D;
+        }
+        
+        .academy-footer {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin: 30px 100px 20px 100px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .academy-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .academy-english {
+            font-size: 14px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>The Spirit of Audrey</h1>
+            <p>오드리 헵번: 아름다움에서 인류애로의 여정</p>
+        </div>
+        
+        <div class="quote-box">
+            <div class="quote-text">
+                "나이가 들수록 기억하세요. 당신에게는 두 개의 손이 있습니다.<br>
+                하나는 자신을 돕기 위한 것이고, 다른 하나는 다른 사람을 돕기 위한 것입니다."
+            </div>
+            <div class="quote-author">- Audrey Hepburn</div>
+        </div>
+        
+        <div class="section-title">📅 오드리 헵번의 인생 타임라인</div>
+        
+        <div class="timeline-container">
+            <div class="timeline-title">전쟁 피해자에서 세계적 자선가까지</div>
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">WWII 시절</div>
+                    <div class="timeline-event">전쟁 중 어린 시절</div>
+                    <div class="timeline-desc">어머니와 함께 굶주림과 질병 속에서 풀을 먹으며 생존. UNICEF의 도움을 받음</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">1950년대</div>
+                    <div class="timeline-event">할리우드 스타 탄생</div>
+                    <div class="timeline-desc">'Roman Holiday', 'My Fair Lady' 등으로 세계적 영화배우가 됨. 리틀 블랙 드레스 아이콘</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">1987년 가을</div>
+                    <div class="timeline-event">인생의 전환점</div>
+                    <div class="timeline-desc">마카오 국제음악축제 참석. 자신의 명성이 타인을 도울 수 있음을 깨달음</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">1988-1992</div>
+                    <div class="timeline-event">UNICEF 친선대사 활동</div>
+                    <div class="timeline-desc">에티오피아, 베트남, 소말리아 등을 방문하여 구호활동. 1993년 세상을 떠남</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-title">✨ 아름다움의 두 얼굴</div>
+        
+        <div class="beauty-comparison">
+            <div class="beauty-box outer-beauty">
+                <div class="beauty-icon">💄</div>
+                <div class="beauty-title">외적 아름다움</div>
+                <div class="beauty-desc">
+                    • 영화 'My Fair Lady', 'Roman Holiday'<br>
+                    • 상징적인 리틀 블랙 드레스<br>
+                    • 전 세계가 사랑한 스타일<br>
+                    • 아직도 많은 사람들이 선망
+                </div>
+            </div>
+            
+            <div class="beauty-box inner-beauty">
+                <div class="beauty-icon">💖</div>
+                <div class="beauty-title">진정한 아름다움</div>
+                <div class="beauty-desc">
+                    • 어려운 사람들을 돕는 마음<br>
+                    • UNICEF 친선대사로서의 헌신<br>
+                    • 자신의 명성을 타인을 위해 사용<br>
+                    • "Her real beauty was her heart"
+                </div>
+            </div>
+        </div>
+        
+        <div class="movies-section">
+            <div class="movies-title">🎬 대표 영화와 스타일</div>
+            <div class="movies-grid">
+                <div class="movie-item">
+                    <div class="movie-title">My Fair Lady</div>
+                    <div class="movie-desc">우아함과 품격의 상징이 된 작품</div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-title">Roman Holiday</div>
+                    <div class="movie-desc">로맨틱 코미디의 고전</div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-title">Little Black Dress</div>
+                    <div class="movie-desc">패션 아이콘으로서의 지위 확립</div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-title">Timeless Style</div>
+                    <div class="movie-desc">오늘날까지도 사랑받는 스타일</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="charity-section">
+            <div class="charity-title">🌍 UNICEF 친선대사 활동</div>
+            
+            <div class="charity-journey">
+                <div class="charity-step">
+                    <div class="charity-year">1988</div>
+                    <div class="charity-country">에티오피아</div>
+                </div>
+                <div class="charity-arrow">→</div>
+                <div class="charity-step">
+                    <div class="charity-year">1990</div>
+                    <div class="charity-country">베트남</div>
+                </div>
+                <div class="charity-arrow">→</div>
+                <div class="charity-step">
+                    <div class="charity-year">1992</div>
+                    <div class="charity-country">소말리아</div>
+                </div>
+            </div>
+            
+            <div class="impact-box">
+                <div class="impact-text">
+                    <strong>첫 번째 에티오피아 방문</strong>에서 굶주린 아이들에게 음식을 가져다주며 그들의 어려운 삶에 충격을 받았습니다. 
+                    <strong>베트남에서는 의약품을 나누어주고 깨끗한 식수 프로그램을 지원</strong>했으며, 
+                    <strong>마지막 소말리아 여행</strong> 이듬해인 1993년 세상을 떠났습니다.
+                </div>
+            </div>
+        </div>
+        
+        <div class="transformation-section">
+            <div class="transformation-box before-box">
+                <div class="transformation-icon">😢</div>
+                <div class="transformation-title">전쟁 시절의 소녀</div>
+                <ul class="transformation-items">
+                    <li>굶주림과 질병</li>
+                    <li>풀을 먹으며 생존</li>
+                    <li>항상 두려움 속에서 살아감</li>
+                    <li>UNICEF의 도움을 받음</li>
+                </ul>
+            </div>
+            
+            <div class="transformation-box after-box">
+                <div class="transformation-icon">🌟</div>
+                <div class="transformation-title">세계적 자선가</div>
+                <ul class="transformation-items">
+                    <li>UNICEF 친선대사</li>
+                    <li>전 세계 어려운 아이들 도움</li>
+                    <li>명성을 선행에 활용</li>
+                    <li>진정한 아름다움 실현</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="legacy-box">
+            <div class="legacy-title">🏛️ 영원한 유산: The Spirit of Audrey</div>
+            <div class="legacy-text">
+                많은 사람들이 그녀의 아름다움과 스타일을 칭찬했지만, 헵번의 진정한 아름다움은 바로 <strong>그녀의 마음</strong>이었습니다. 
+                이를 기리기 위해 UNICEF는 <strong>'The Spirit of Audrey'</strong> 동상을 만들었고, 그녀를 존경하는 사람들이 그녀의 사명을 이어가고 있습니다.
+            </div>
+            <div class="statue-info">
+                💫 UNICEF에서 제작한 'The Spirit of Audrey' 동상은 그녀의 인도주의 정신을 영원히 기리고 있습니다.
+            </div>
+        </div>
+        
+        <div class="academy-footer">
+            <div class="academy-name">비타민영어클리닉 학원</div>
+            <div class="academy-english">Vitamin English Clinic</div>
+        </div>
+    </div>
+</body>
+</html>
